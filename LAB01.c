@@ -24,7 +24,7 @@ int main(){
 		printf("\n %c 5 - Trabalhador Resgatado (escravidão)",272);
 		printf("\n--------------------------------------------------------------");
 		printf("\n %c 6 - Nenhuma das opções\n",272);
-		printf("______________________________________________________________\n");
+		printf("______________________________________________________________\n %c",272);
 		scanf("%d",&tipoBeneficio);
 		system("clear||cls");
 		switch(tipoBeneficio){
@@ -45,24 +45,25 @@ int main(){
 				printf("Você escolheu: %d",tipoBeneficio);
 				break;
 			case 6:
-				printf("Você escolheu: %d",tipoBeneficio);
+				printf("\n Para receber o seguro-desemprego é necessário se enquadrar em umas das condições das opções de 1 a 5.\n");
+				printf("---------------------------------------------------------------------------------------------------------");
 				break;
 			default:
-				printf("\n ####Opção invalida, deseja tentar novamente?####\n");
-				printf("\nDigite o número 1 para sim ou o número 2 para não:\n");
-				scanf("%d",&tipoBeneficio);
-				if(tipoBeneficio==1){
-					system("clear||cls");
-					teste=true;
-				}	
-				else{
-					system("clear||cls");
-					printf("\n\n\n\n\n\n\n       %c%c%c%c Agradecemos a preferência! %c%c%c%c\n\n\n\n\n\n\n", 259,3,259,3,259,3,259,3);
-					return (0);
-				}
-					
+				printf("\n ####  Opção invalida  ####\n");					
 				break;
 		}
+		printf("\n\n\n          Deseja realizar uma nova consulta?\n");
+		printf("\n  %c Digite o número 1 para sim ou o número 2 para não:\n  %c ",272,272);
+		scanf("%d",&tipoBeneficio);
+		if(tipoBeneficio==1){
+			system("clear||cls");
+			teste=true;
+		}	
+		else{
+			system("clear||cls");
+			printf("\n\n\n\n\n\n\n       %c %c %c %c Agradecemos a preferência! %c %c %c %c\n\n\n\n\n\n\n", 259,3,259,3,259,3,259,3);
+			return (0);
+			getch();
+		}
 	}while(teste==true);
-	return (0);
 }
