@@ -3,12 +3,15 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <stdbool.h>
+
 int main(){
 	setlocale(LC_ALL,"Portuguese");
 	char tipoBeneficio;
+	int requisitos;
+	int soma=0;
 	bool teste;
 	
-	printf("Descubra se voçê tem direito ao benefício do Seguro-Desemprego\n");
+	printf("Descubra se você tem direito ao benefício do Seguro-Desemprego\n");
 	printf("______________________________________________________________\n");
 	do{	
 		printf("\n  ******* Insira um dos números abaixo para continuar *******\n");
@@ -24,25 +27,204 @@ int main(){
 		printf("\n %c 5 - Trabalhador Resgatado (escravidão)",272);
 		printf("\n--------------------------------------------------------------");
 		printf("\n %c 6 - Nenhuma das opções\n",272);
-		printf("______________________________________________________________\n %c",272);
+		printf("______________________________________________________________\n %c ",272);
 		scanf("%d",&tipoBeneficio);
 		system("clear||cls");
+		printf("\n\nPara as próximas perguntas responda 1 para SIM e 2 para NÃO");
+		printf("\n-----------------------------------------------------------------\n");
 		switch(tipoBeneficio){
 			teste=false;
 			case 1:
-				printf("Você escolheu: %d",tipoBeneficio);
+				printf("\nFoi dispensado sem justa causa?\n%c ",272);
+				scanf("%d",&requisitos);
+				if(requisitos==2){
+					printf("\nVocê não possui o direito de receber o benefício");	
+					printf("\n-------------------------------------------------");
+					break;				
+				}
+				else if(requisitos==1){ //recebendo as respostas para somatoria de pontos e analise dos requisitos do seguro.
+					//requisitos para ter o seguro (ignorar a demissão indireta): Sim, Sim, Não, Não, Sim - 5 pontos
+					printf("\nFoi dispensado também por demissão indireta?\n%c ",272);
+					scanf("%d",&requisitos);
+					printf("\nRecebeu mais de 6 meses de salário consecutivamente?\n%c ",272);
+					scanf("%d",&requisitos);
+					if(requisitos==1){
+						soma++;
+					}
+					printf("\nEstá no momento desempregado?\n%c ",272);
+					scanf("%d",&requisitos);
+					if(requisitos==1){
+						soma++;
+					}
+					printf("\nPossui alguma renda própria suficiente para manter seu sustento e de seus familiares?\n%c ",272);
+					scanf("%d",&requisitos);
+					if(requisitos==2){
+						soma++;
+					}
+					printf("\nEstá participando de outro benefício previdenciário (exceto auxílio-acidente e pensão por morte)?\n%c ",272);
+					scanf("%d",&requisitos);
+					if(requisitos==2){
+						soma++;
+					}
+					printf("\nEsteve trabalhando por pelo menos 1 ano (12 meses) nesses ultimos 3 anos (36 meses)\n%c ",272);
+					scanf("%d",&requisitos);
+					if(requisitos==1){
+						soma++;
+					}
+					if(soma==5){
+						system("clear||cls");
+						printf("----------------------------------------------------------------------\n");
+						printf("O usuário atende aos requisitos para receber o Seguro-Desemprego");
+						printf("\n----------------------------------------------------------------------");
+						break;
+					}
+					else{
+						system("clear||cls");
+						printf("----------------------------------------------------------------------\n");
+						printf("O usuário NÃO atende aos requisitos para receber o Seguro-Desemprego");
+						printf("\n----------------------------------------------------------------------");
+						break;
+					}	
+				}				
 				break;
 			case 2:
-				printf("Você escolheu: %d",tipoBeneficio);
+				//requisitos para ter o seguro : Sim, Sim - 2 pontos
+				printf("\nEstá com contrato de trabalho suspenso?\n%c ",272);
+				scanf("%d",&requisitos);
+				if(requisitos==1){
+					soma++;
+				}
+				printf("\nEstá devidamente matriculado em um curso ou qualificação profissional?\n%c ",272);
+				scanf("%d",&requisitos);
+				if(requisitos==1){
+					soma++;
+				}
+				if(soma==2){
+					system("clear||cls");
+					printf("----------------------------------------------------------------------\n");
+					printf("O usuário atende aos requisitos para receber o Seguro-Desemprego");
+					printf("\n----------------------------------------------------------------------");
+					break;
+				}
+				else{
+					system("clear||cls");
+					printf("----------------------------------------------------------------------\n");
+					printf("O usuário NÃO atende aos requisitos para receber o Seguro-Desemprego");
+					printf("\n----------------------------------------------------------------------");
+					break;
+				}
 				break;
 			case 3:
-				printf("Você escolheu: %d",tipoBeneficio);
+				//para conseguir o seguro: Sim, Sim, Não, Não - 4 pontos
+				printf("\nFoi dispensado sem justa causa?\n%c ",272);
+				scanf("%d",&requisitos);
+				if(requisitos==1){
+					soma++;
+				}
+				printf("\nNos ultimos 2 anos, você trabalhou exclusivamente como empregado doméstico por, no minimo, 15 meses?\n%c ",272);
+				scanf("%d",&requisitos);
+				if(requisitos==1){
+					soma++;
+				}
+				printf("\nPossui renda própria suficiente para sustentar a você e seus familiares?\n%c ",272);
+				scanf("%d",&requisitos);
+				if(requisitos==2){
+					soma++;
+				}
+				printf("\nEstá participando de outro benefício previdenciário (exceto auxílio-acidente e pensão por morte)?\n%c ",272);
+				scanf("%d",&requisitos);
+				if(requisitos==2){
+					soma++;
+				}
+				if(soma==4){
+					system("clear||cls");
+					printf("----------------------------------------------------------------------\n");
+					printf("O usuário atende aos requisitos para receber o Seguro-Desemprego");
+					printf("\n----------------------------------------------------------------------");
+					break;
+				}
+				else{
+					system("clear||cls");
+					printf("----------------------------------------------------------------------\n");
+					printf("O usuário NÃO atende aos requisitos para receber o Seguro-Desemprego");
+					printf("\n----------------------------------------------------------------------");
+					break;
+				}
 				break;
 			case 4:
-				printf("Você escolheu: %d",tipoBeneficio);
+				//requisitos para ter o beneficio: Sim, Sim, Não, Sim, Não - 5
+				printf("\nPossui inscrição no INSS como segurado especial ?\n%c ",272);
+				scanf("%d",&requisitos);
+				if(requisitos==1){
+					soma++;
+				}
+				printf("\nPossui comprovação de venda do pescado para o adquirente dos últimos 12 meses?\n%c",272);
+				scanf("%d",&requisitos);
+				if(requisitos==1){
+					soma++;
+				}
+				printf("\nEstá participando de outro benefício previdenciário (exceto auxílio-acidente e pensão por morte)?\n%c ",272);
+				scanf("%d",&requisitos);
+				if(requisitos==2){
+					soma++;
+				}
+				printf("\nVocê comprova exercício profissional na pesca artesanal e que, se dedica na atividade?\n%c ",272);
+				scanf("%d",&requisitos);
+				if(requisitos==1){
+					soma++;
+				}
+				printf("\nEstá associado a outro emprego ou outra fonte de renda que não seja relacionado a pesca?\n%c ",272);
+				scanf("%d",&requisitos);
+				if(requisitos==2){
+					soma++;
+				}
+				if(soma==5){
+					system("clear||cls");
+					printf("----------------------------------------------------------------------\n");
+					printf("O usuário atende aos requisitos para receber o Seguro-Desemprego");
+					printf("\n----------------------------------------------------------------------");
+					break;
+				}
+				else{
+					system("clear||cls");
+					printf("----------------------------------------------------------------------\n");
+					printf("O usuário NÃO atende aos requisitos para receber o Seguro-Desemprego");
+					printf("\n----------------------------------------------------------------------");
+					break;
+				}
 				break;
 			case 5:
-				printf("Você escolheu: %d",tipoBeneficio);
+				//printf("Você escolheu: %d",tipoBeneficio);
+				//requisitos aceito: sim, não, não - 3
+				printf("\nVocê comprova ter sido resgatado do trabalho forçado devido a ação de fiscalização do MTE?\n%c ",272);
+				scanf("%d",&requisitos);
+				if(requisitos==1){
+					soma++;
+				}
+				printf("\nEstá participando de outro benefício previdenciário (exceto auxílio-acidente e pensão por morte)?\n%c ",272);
+				scanf("%d",&requisitos);
+				if(requisitos==2){
+					soma++;
+				}
+				printf("\nPossui renda própria suficiente para sustentar a você e seus familiares?\n%c ",272);
+				scanf("%d",&requisitos);
+				if(requisitos==2){
+					soma++;
+				}
+				if(soma==3){
+					system("clear||cls");
+					printf("----------------------------------------------------------------------\n");
+					printf("O usuário atende aos requisitos para receber o Seguro-Desemprego");
+					printf("\n----------------------------------------------------------------------");
+					break;
+				}
+				else{
+					system("clear||cls");
+					printf("----------------------------------------------------------------------\n");
+					printf("O usuário NÃO atende aos requisitos para receber o Seguro-Desemprego");
+					printf("\n----------------------------------------------------------------------");
+					break;
+				}
 				break;
 			case 6:
 				printf("\n Para receber o seguro-desemprego é necessário se enquadrar em umas das condições das opções de 1 a 5.\n");
@@ -58,10 +240,11 @@ int main(){
 		if(tipoBeneficio==1){
 			system("clear||cls");
 			teste=true;
+			soma=0;
 		}	
 		else{
 			system("clear||cls");
-			printf("\n\n\n\n\n\n\n       %c %c %c %c Agradecemos a preferência! %c %c %c %c\n\n\n\n\n\n\n", 259,3,259,3,259,3,259,3);
+			printf("\n\n\n\n\n\n\n        Agradecemos a preferência! \n\n\n\n\n\n\n");
 			return (0);
 			getch();
 		}
