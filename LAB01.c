@@ -1,14 +1,21 @@
+/*************************************/
+/* Aluno1: Bruna Ciriaco Benedito */
+/* Aluno2: Fernanda Gonçalves Lima */
+/* Aluno3: João Pedro Oliveira Gonçalves */
+/* Aluno4: Paulo Henrique Cardoso de Jesus */
+/* Aluno4: Vicente Santos Gonçalves */
+/* Algoritmo e Lógica de Programação */
+/* Prof. Eliane */
+/*************************************/
 #include <stdio.h>
 #include <locale.h>
 #include <stdlib.h>
 #include <conio.h>
 #include <stdbool.h>
-
 int main(){
 	setlocale(LC_ALL,"Portuguese");
 	char tipoBeneficio;
-	int requisitos;
-	int soma=0;
+	int requisitos, soma=0;
 	bool teste;
 	
 	printf("Descubra se você tem direito ao benefício do Seguro-Desemprego\n");
@@ -38,8 +45,8 @@ int main(){
 				printf("\nFoi dispensado sem justa causa?\n%c ",272);
 				scanf("%d",&requisitos);
 				if(requisitos==2){
-					printf("\nVocê não possui o direito de receber o benefício");	
-					printf("\n-------------------------------------------------");
+					system("clear||cls");
+					printf("\n   Você não possui o direito de receber o benefício.\n   -------------------------------------------------");
 					break;				
 				}
 				else if(requisitos==1){ //recebendo as respostas para somatoria de pontos e analise dos requisitos do seguro.
@@ -231,7 +238,7 @@ int main(){
 				printf("---------------------------------------------------------------------------------------------------------");
 				break;
 			default:
-				printf("\n ####  Opção invalida  ####\n");					
+				printf("\n          ########  Opção invalida  #######\n_______________________________________________________");					
 				break;
 		}
 		printf("\n\n\n          Deseja realizar uma nova consulta?\n");
