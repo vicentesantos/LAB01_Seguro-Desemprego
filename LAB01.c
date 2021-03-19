@@ -163,7 +163,7 @@ int main(){
 								soma=5;
 								break;
 						}
-						printf("\nPara os dados Informados seram %d parcelas de R$ %.2f no total de R$ %.2f.\n",soma,salario,soma*salario);
+						printf("\nPara os dados Informados o beneficio será de %d parcelas de R$ %.2f no total de R$ %.2f.\n",soma,salario,soma*salario);
 					}
 					else{
 						system("clear||cls");
