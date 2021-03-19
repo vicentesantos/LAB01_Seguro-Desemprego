@@ -16,6 +16,7 @@ int main(){
 	setlocale(LC_ALL,"Portuguese");
 	char tipoBeneficio;
 	int requisitos, soma=0;
+	float salario01, salario02, salario03, salario;
 	bool teste;
 	
 	printf("Descubra se você tem direito ao benefício do Seguro-Desemprego\n");
@@ -44,7 +45,9 @@ int main(){
 			case 1:
 				printf("\nFoi dispensado sem justa causa?\n%c ",272);
 				scanf("%d",&requisitos);
-				if(requisitos==2){
+				printf("\nRecebeu o Seguro-Desemprego nos ultimos 16 meses?\n%c",272);
+				scanf("%d",&tipoBeneficio);
+				if(requisitos==2||tipoBeneficio==1){
 					system("clear||cls");
 					printf("\n   Você não possui o direito de receber o benefício.\n   -------------------------------------------------");
 					break;				
@@ -78,12 +81,89 @@ int main(){
 					if(requisitos==1){
 						soma++;
 					}
-					if(soma==5){
+					printf("\nEstá dentro do período aquisitivo (16 meses a partir da última dispensa)?\n%c ",272);
+					scanf("%d",&requisitos);
+					if(requisitos==1){
+						soma++;
+					}
+					if(soma==6){
 						system("clear||cls");
-						printf("----------------------------------------------------------------------\n");
-						printf("O usuário atende aos requisitos para receber o Seguro-Desemprego");
-						printf("\n----------------------------------------------------------------------");
-						break;
+						printf("---------------------------------------------------------------------------\n");
+						printf("     O usuário atende aos requisitos para receber o Seguro-Desemprego");
+						printf("\n---------------------------------------------------------------------------\n");
+						printf("\nComplete as informções abaixo para o calculo de parcelas e valor a receber:\n");
+						printf("\nQuantos meses trabalhados nos ultimos 36 meses? [insira um valor inteiro]\n%c",272);
+						scanf("%d",&tipoBeneficio);
+						system("clear||cls");
+						//Solicitando dados de salário
+						printf("\nNo seu último vinculo empregatício quantos salários recebeu de 1 a 3?\n%c",272);
+						scanf("%d",&requisitos);
+						system("clear||cls");
+						printf("Informe os valores solicitados abaixo:\nsalário do último mês?\n%c",272);
+						scanf("%f",&salario01);
+						switch(requisitos){
+							case 1:
+								if (salario01<1686.80)
+									salario01=(salario01*0.80);							
+								else if(salario01<2811.61)
+									salario01=(salario01*0.5+1349.43);
+								else{
+									salario01=1911.84;
+								}
+								salario=salario01;
+								break;
+								if (salario<1100.00)
+									salario=1100.00;
+								
+							case 2:
+								printf("Salário do penúltimo mês?\n%c",272);
+								scanf("%f",&salario02);
+								salario02=(salario01+salario02)/2;
+								if (salario02<1686.80)
+									salario02=(salario02*0.80);							
+								else if(salario02<2811.61)
+									salario02=(salario02*0.5+1349.43);
+								else{
+									salario02=1911.84;
+								}
+								salario=salario02;
+								if (salario<1100.00)
+									salario=1100.00;
+								break;
+							case 3:
+								printf("Salário do penúltimo mês?\n%c",272);
+								scanf("%f",&salario02);
+								printf("Salário do antepenúltimo mês?\n%c",272);
+								scanf("%f",&salario03);
+								salario03=(salario01+salario02+salario03)/3;
+								if (salario03<1686.80)
+									salario03=(salario03*0.80);							
+								else if(salario03<2811.61)
+									salario03=(salario03*0.5+1349.43);
+								else{
+									salario03=1911.84;
+								}
+								salario=salario03;
+								if (salario<1100.00)
+									salario=1100.00;
+								break;
+						}
+						//Escolher a quantidade de parcelas
+						switch(tipoBeneficio){
+							case 6 ... 11: //três parcelas
+								soma=3;
+								break;
+							case 12 ... 23://quatro parcelas
+								soma=4;
+								break;
+							case 0 ... 5:  //quantidade invalida
+								printf("\nQuantidade de meses inferior a 6 \n");
+								break;
+							default:     //cinco parcelas
+								soma=5;
+								break;
+						}
+						printf("\nPara os dados Informados seram %d parcelas de R$ %.2f no total de R$ %.2f.\n",soma,salario,soma*salario);
 					}
 					else{
 						system("clear||cls");
