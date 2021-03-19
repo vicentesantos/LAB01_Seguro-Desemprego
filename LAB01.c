@@ -303,6 +303,8 @@ int main(){
 					printf("----------------------------------------------------------------------\n");
 					printf("O usuário atende aos requisitos para receber o Seguro-Desemprego");
 					printf("\n----------------------------------------------------------------------");
+					printf("\nDe acordo com a Lei N'º' 10.608, DE 20 DE DEZEMBRO DE 2002.\n");
+					printf("\nVocê tem direito à 3 parcelas no valor de R$ 1.100,00, total de R$ 3.300,00 reais.");
 					break;
 				}
 				else{
