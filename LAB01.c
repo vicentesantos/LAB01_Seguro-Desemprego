@@ -106,7 +106,7 @@ int main(){
 								if (salario01<1686.80)
 									salario01=(salario01*0.80);							
 								else if(salario01<2811.61)
-									salario01=(salario01*0.5+1349.43);
+									salario01=((2811,60-salario01)*0.5+1349.43);
 								else{
 									salario01=1911.84;
 								}
@@ -122,7 +122,7 @@ int main(){
 								if (salario02<1686.80)
 									salario02=(salario02*0.80);							
 								else if(salario02<2811.61)
-									salario02=(salario02*0.5+1349.43);
+									salario02=((2811,60-salario02)*0.5+1349.43);
 								else{
 									salario02=1911.84;
 								}
@@ -139,7 +139,7 @@ int main(){
 								if (salario03<1686.80)
 									salario03=(salario03*0.80);							
 								else if(salario03<2811.61)
-									salario03=(salario03*0.5+1349.43);
+									salario03=((2811,60-salario03)*0.5+1349.43);
 								else{
 									salario03=1911.84;
 								}
