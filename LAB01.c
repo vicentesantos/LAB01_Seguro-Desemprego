@@ -106,7 +106,7 @@ int main(){
 								if (salario01<1686.80)
 									salario01=(salario01*0.80);							
 								else if(salario01<2811.61)
-									salario01=((2811,60-salario01)*0.5+1349.43);
+									salario01=((salario01-1686.79)*0.5+1349.43);
 								else{
 									salario01=1911.84;
 								}
@@ -122,7 +122,7 @@ int main(){
 								if (salario02<1686.80)
 									salario02=(salario02*0.80);							
 								else if(salario02<2811.61)
-									salario02=((2811,60-salario02)*0.5+1349.43);
+									salario02=((salario02-1686.79)*0.5+1349.43);
 								else{
 									salario02=1911.84;
 								}
@@ -139,7 +139,7 @@ int main(){
 								if (salario03<1686.80)
 									salario03=(salario03*0.80);							
 								else if(salario03<2811.61)
-									salario03=((2811,60-salario03)*0.5+1349.43);
+									salario03=((salario03-1686.79)*0.5+1349.43);
 								else{
 									salario03=1911.84;
 								}
@@ -191,6 +191,79 @@ int main(){
 					printf("----------------------------------------------------------------------\n");
 					printf("O usuário atende aos requisitos para receber o Seguro-Desemprego");
 					printf("\n----------------------------------------------------------------------");
+					printf("\nComplete as informções abaixo para o calculo de parcelas e valor a receber:\n");
+						printf("\nQuantos meses trabalhados nos ultimos 36 meses? [insira um valor inteiro]\n%c",272);
+						scanf("%d",&tipoBeneficio);
+						system("clear||cls");
+						//Solicitando dados de salário
+						printf("\nNo seu último vinculo empregatício quantos salários recebeu de 1 a 3?\n%c",272);
+						scanf("%d",&requisitos);
+						system("clear||cls");
+						printf("Informe os valores solicitados abaixo:\nsalário do último mês?\n%c",272);
+						scanf("%f",&salario01);
+						switch(requisitos){
+							case 1:
+								if (salario01<1686.80)
+									salario01=(salario01*0.80);							
+								else if(salario01<2811.61)
+									salario01=((salario01-1686.79)*0.5+1349.43);
+								else{
+									salario01=1911.84;
+								}
+								salario=salario01;
+								break;
+								if (salario<1100.00)
+									salario=1100.00;
+								
+							case 2:
+								printf("Salário do penúltimo mês?\n%c",272);
+								scanf("%f",&salario02);
+								salario02=(salario01+salario02)/2;
+								if (salario02<1686.80)
+									salario02=(salario02*0.80);							
+								else if(salario02<2811.61)
+									salario02=((salario02-1686.79)*0.5+1349.43);
+								else{
+									salario02=1911.84;
+								}
+								salario=salario02;
+								if (salario<1100.00)
+									salario=1100.00;
+								break;
+							case 3:
+								printf("Salário do penúltimo mês?\n%c",272);
+								scanf("%f",&salario02);
+								printf("Salário do antepenúltimo mês?\n%c",272);
+								scanf("%f",&salario03);
+								salario03=(salario01+salario02+salario03)/3;
+								if (salario03<1686.80)
+									salario03=(salario03*0.80);							
+								else if(salario03<2811.61)
+									salario03=((salario03-1686.79)*0.5+1349.43);
+								else{
+									salario03=1911.84;
+								}
+								salario=salario03;
+								if (salario<1100.00)
+									salario=1100.00;
+								break;
+						}
+						//Escolher a quantidade de parcelas
+						switch(tipoBeneficio){
+							case 6 ... 11: //três parcelas
+								soma=3;
+								break;
+							case 12 ... 23://quatro parcelas
+								soma=4;
+								break;
+							case 0 ... 5:  //quantidade invalida
+								printf("\nQuantidade de meses inferior a 6 \n");
+								break;
+							default:     //cinco parcelas
+								soma=5;
+								break;
+						}
+						printf("\nPara os dados Informados o beneficio será de %d parcelas de R$ %.2f no total de R$ %.2f.\n",soma,salario,soma*salario);
 					break;
 				}
 				else{
@@ -202,6 +275,7 @@ int main(){
 				}
 				break;
 			case 3:
+				//https://www.gov.br/trabalho/pt-br/assuntos/trabalhador/seguro-desemprego/seguro-desemprego-empregado-domestico
 				//para conseguir o seguro: Sim, Sim, Não, Não - 4 pontos
 				printf("\nFoi dispensado sem justa causa?\n%c ",272);
 				scanf("%d",&requisitos);
@@ -228,6 +302,8 @@ int main(){
 					printf("----------------------------------------------------------------------\n");
 					printf("O usuário atende aos requisitos para receber o Seguro-Desemprego");
 					printf("\n----------------------------------------------------------------------");
+					printf("\nDe acordo com a Lei n.º 10.208 de 23 de março de 2001 e pela Lei Complementar nº 150, de 02 de junho de 2014.\n");
+					printf("\nVocê tem direito à 3 parcelas no valor de R$ 1.100,00 no total de R$ 3.300,00 reais.");
 					break;
 				}
 				else{
@@ -270,6 +346,8 @@ int main(){
 					printf("----------------------------------------------------------------------\n");
 					printf("O usuário atende aos requisitos para receber o Seguro-Desemprego");
 					printf("\n----------------------------------------------------------------------");
+					printf("\nDe acordo com a LEI Nº 10.779, DE 25 DE NOVEMBRO DE 2003.\n");
+					printf("\nVocê tem direito ao benefício do seguro-desemprego durante o período de defeso de atividade pesqueira para a preservação da espécie com parcelas no valor de R$ 1.100,00.");
 					break;
 				}
 				else{
@@ -304,7 +382,7 @@ int main(){
 					printf("O usuário atende aos requisitos para receber o Seguro-Desemprego");
 					printf("\n----------------------------------------------------------------------");
 					printf("\nDe acordo com a Lei N'º' 10.608, DE 20 DE DEZEMBRO DE 2002.\n");
-					printf("\nVocê tem direito à 3 parcelas no valor de R$ 1.100,00, total de R$ 3.300,00 reais.");
+					printf("\nVocê tem direito à 3 parcelas no valor de R$ 1.100,00 no total de R$ 3.300,00 reais.");
 					break;
 				}
 				else{
@@ -316,7 +394,8 @@ int main(){
 				}
 				break;
 			case 6:
-				printf("\n Para receber o seguro-desemprego é necessário se enquadrar em umas das condições das opções de 1 a 5.\n");
+				system("clear||cls");
+				printf("\n Para receber o seguro-desemprego é necessário se enquadrar em uma das condições das opções de 1 a 5.\n");
 				printf("---------------------------------------------------------------------------------------------------------");
 				break;
 			default:
