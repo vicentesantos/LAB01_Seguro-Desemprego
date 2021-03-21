@@ -14,8 +14,8 @@
 #include <stdbool.h>
 int main(){
 	setlocale(LC_ALL,"Portuguese");
-	char tipoBeneficio;
-	int requisitos, soma=0;
+	char requisitos, tipoBeneficio;
+	int soma=0,soma1=0;
 	float salario01, salario02, salario03, salario;
 	bool teste;
 	
@@ -42,51 +42,65 @@ int main(){
 		printf("\n-----------------------------------------------------------------\n");
 		switch(tipoBeneficio){
 			teste=false;
-			case 1:
-				printf("\nFoi dispensado sem justa causa?\n%c ",272);
-				scanf("%d",&requisitos);
-				printf("\nRecebeu o Seguro-Desemprego nos ultimos 16 meses?\n%c",272);
-				scanf("%d",&tipoBeneficio);
-				if(requisitos==2||tipoBeneficio==1){
-					system("clear||cls");
-					printf("\n   Você não possui o direito de receber o benefício.\n   -------------------------------------------------");
-					break;				
-				}
-				else if(requisitos==1){ //recebendo as respostas para somatoria de pontos e analise dos requisitos do seguro.
-					//requisitos para ter o seguro (ignorar a demissão indireta): Sim, Sim, Não, Não, Sim - 5 pontos
-					printf("\nFoi dispensado também por demissão indireta?\n%c ",272);
+			case 1 ...2:
+				if(tipoBeneficio==1){//Trabalhador Formal Pergunta
+					printf("\nFoi dispensado sem justa causa?\n%c ",272);
 					scanf("%d",&requisitos);
-					printf("\nRecebeu mais de 6 meses de salário consecutivamente?\n%c ",272);
+				}else{//Bolsa de qualificação - requisitos para ter o seguro : Sim, Sim - 2 pontos
+					printf("\nEstá com contrato de trabalho suspenso?\n%c ",272);
 					scanf("%d",&requisitos);
 					if(requisitos==1){
 						soma++;
 					}
-					printf("\nEstá no momento desempregado?\n%c ",272);
+					printf("\nEstá devidamente matriculado em um curso ou qualificação profissional?\n%c ",272);
 					scanf("%d",&requisitos);
 					if(requisitos==1){
 						soma++;
+					}
+				}
+				printf("\nRecebeu o Seguro-Desemprego nos ultimos 16 meses?\n%c",272);
+				scanf("%d",&soma1);
+				if(requisitos==1 && tipoBeneficio==1 && soma1==2 || soma==2 && soma1==2){
+					//requisitos para ter o seguro (ignorar a demissão indireta): Sim, Sim, sim, Não, Não, Sim - 6 pontos
+					if(tipoBeneficio==1){
+						printf("\nFoi dispensado também por demissão indireta?\n%c ",272);
+						scanf("%d",&requisitos);
+						printf("\nEstá no momento desempregado?\n%c ",272);
+						scanf("%d",&requisitos);
+						if(requisitos==1){
+							soma++;
+						}
+						printf("\nEstá dentro do período aquisitivo (16 meses a partir da última dispensa)?\n%c ",272);
+						scanf("%d",&requisitos);
+						if(requisitos==1){
+							soma++;
+						}
+					}
+					printf("\nRecebeu mais de 6 meses de salário consecutivamente?\n%c ",272);
+					scanf("%d",&requisitos);
+					if(requisitos==1){
+						soma++;
+						soma1++;
 					}
 					printf("\nPossui alguma renda própria suficiente para manter seu sustento e de seus familiares?\n%c ",272);
 					scanf("%d",&requisitos);
 					if(requisitos==2){
 						soma++;
+						soma1++;
 					}
 					printf("\nEstá participando de outro benefício previdenciário (exceto auxílio-acidente e pensão por morte)?\n%c ",272);
 					scanf("%d",&requisitos);
 					if(requisitos==2){
 						soma++;
+						soma1++;
 					}
-					printf("\nEsteve trabalhando por pelo menos 1 ano (12 meses) nesses ultimos 3 anos (36 meses)\n%c ",272);
+					printf("\nEsteve trabalhando por pelo menos 1 ano (12 meses) nesses últimos 3 anos (36 meses)\n%c ",272);
 					scanf("%d",&requisitos);
 					if(requisitos==1){
 						soma++;
+						soma1++;
 					}
-					printf("\nEstá dentro do período aquisitivo (16 meses a partir da última dispensa)?\n%c ",272);
-					scanf("%d",&requisitos);
-					if(requisitos==1){
-						soma++;
-					}
-					if(soma==6){
+					if(soma==6||soma1==4){
 						system("clear||cls");
 						printf("---------------------------------------------------------------------------\n");
 						printf("     O usuário atende aos requisitos para receber o Seguro-Desemprego");
@@ -96,57 +110,57 @@ int main(){
 						scanf("%d",&tipoBeneficio);
 						system("clear||cls");
 						//Solicitando dados de salário
-						printf("\nNo seu último vinculo empregatício quantos salários recebeu de 1 a 3?\n%c",272);
+						printf("\nEm seu último vinculo empregatício, trabalhou quantos meses remunerado? de 1(mínimo) a 3(máximo)??\n%c",272);
 						scanf("%d",&requisitos);
 						system("clear||cls");
 						printf("Informe os valores solicitados abaixo:\nsalário do último mês?\n%c",272);
 						scanf("%f",&salario01);
 						switch(requisitos){
-							case 1:
-								if (salario01<1686.80)
-									salario01=(salario01*0.80);							
-								else if(salario01<2811.61)
-									salario01=((salario01-1686.79)*0.5+1349.43);
-								else{
-									salario01=1911.84;
-								}
-								salario=salario01;
-								break;
-								if (salario<1100.00)
-									salario=1100.00;
-								
-							case 2:
-								printf("Salário do penúltimo mês?\n%c",272);
-								scanf("%f",&salario02);
-								salario02=(salario01+salario02)/2;
-								if (salario02<1686.80)
-									salario02=(salario02*0.80);							
-								else if(salario02<2811.61)
-									salario02=((salario02-1686.79)*0.5+1349.43);
-								else{
-									salario02=1911.84;
-								}
-								salario=salario02;
-								if (salario<1100.00)
-									salario=1100.00;
-								break;
-							case 3:
-								printf("Salário do penúltimo mês?\n%c",272);
-								scanf("%f",&salario02);
-								printf("Salário do antepenúltimo mês?\n%c",272);
-								scanf("%f",&salario03);
-								salario03=(salario01+salario02+salario03)/3;
-								if (salario03<1686.80)
-									salario03=(salario03*0.80);							
-								else if(salario03<2811.61)
-									salario03=((salario03-1686.79)*0.5+1349.43);
-								else{
-									salario03=1911.84;
-								}
-								salario=salario03;
-								if (salario<1100.00)
-									salario=1100.00;
-								break;
+						case 1:
+							if (salario01<1686.80)
+								salario01=(salario01*0.80);							
+							else if(salario01<2811.61)
+								salario01=((salario01-1686.79)*0.5+1349.43);
+							else{
+								salario01=1911.84;
+							}
+							salario=salario01;
+							break;
+							if (salario<1100.00)
+								salario=1100.00;
+							
+						case 2:
+							printf("Salário do penúltimo mês?\n%c",272);
+							scanf("%f",&salario02);
+							salario02=(salario01+salario02)/2;
+							if (salario02<1686.80)
+								salario02=(salario02*0.80);							
+							else if(salario02<2811.61)
+								salario02=((salario02-1686.79)*0.5+1349.43);
+							else{
+								salario02=1911.84;
+							}
+							salario=salario02;
+							if (salario<1100.00)
+								salario=1100.00;
+							break;
+						case 3:
+							printf("Salário do penúltimo mês?\n%c",272);
+							scanf("%f",&salario02);
+							printf("Salário do antepenúltimo mês?\n%c",272);
+							scanf("%f",&salario03);
+							salario03=(salario01+salario02+salario03)/3;
+							if (salario03<1686.80)
+								salario03=(salario03*0.80);							
+							else if(salario03<2811.61)
+								salario03=((salario03-1686.79)*0.5+1349.43);
+							else{
+								salario03=1911.84;
+							}
+							salario=salario03;
+							if (salario<1100.00)
+								salario=1100.00;
+							break;
 						}
 						//Escolher a quantidade de parcelas
 						switch(tipoBeneficio){
@@ -163,7 +177,9 @@ int main(){
 								soma=5;
 								break;
 						}
+						system("clear||cls");
 						printf("\nPara os dados Informados o beneficio será de %d parcelas de R$ %.2f no total de R$ %.2f.\n",soma,salario,soma*salario);
+						printf("--------------------------------------------------------------------------------------------\n");
 					}
 					else{
 						system("clear||cls");
@@ -171,100 +187,7 @@ int main(){
 						printf("O usuário NÃO atende aos requisitos para receber o Seguro-Desemprego");
 						printf("\n----------------------------------------------------------------------");
 						break;
-					}	
-				}				
-				break;
-			case 2:
-				//requisitos para ter o seguro : Sim, Sim - 2 pontos
-				printf("\nEstá com contrato de trabalho suspenso?\n%c ",272);
-				scanf("%d",&requisitos);
-				if(requisitos==1){
-					soma++;
-				}
-				printf("\nEstá devidamente matriculado em um curso ou qualificação profissional?\n%c ",272);
-				scanf("%d",&requisitos);
-				if(requisitos==1){
-					soma++;
-				}
-				if(soma==2){
-					system("clear||cls");
-					printf("----------------------------------------------------------------------\n");
-					printf("O usuário atende aos requisitos para receber o Seguro-Desemprego");
-					printf("\n----------------------------------------------------------------------");
-					printf("\nComplete as informções abaixo para o calculo de parcelas e valor a receber:\n");
-						printf("\nQuantos meses trabalhados nos ultimos 36 meses? [insira um valor inteiro]\n%c",272);
-						scanf("%d",&tipoBeneficio);
-						system("clear||cls");
-						//Solicitando dados de salário
-						printf("\nNo seu último vinculo empregatício quantos salários recebeu de 1 a 3?\n%c",272);
-						scanf("%d",&requisitos);
-						system("clear||cls");
-						printf("Informe os valores solicitados abaixo:\nsalário do último mês?\n%c",272);
-						scanf("%f",&salario01);
-						switch(requisitos){
-							case 1:
-								if (salario01<1686.80)
-									salario01=(salario01*0.80);							
-								else if(salario01<2811.61)
-									salario01=((salario01-1686.79)*0.5+1349.43);
-								else{
-									salario01=1911.84;
-								}
-								salario=salario01;
-								break;
-								if (salario<1100.00)
-									salario=1100.00;
-								
-							case 2:
-								printf("Salário do penúltimo mês?\n%c",272);
-								scanf("%f",&salario02);
-								salario02=(salario01+salario02)/2;
-								if (salario02<1686.80)
-									salario02=(salario02*0.80);							
-								else if(salario02<2811.61)
-									salario02=((salario02-1686.79)*0.5+1349.43);
-								else{
-									salario02=1911.84;
-								}
-								salario=salario02;
-								if (salario<1100.00)
-									salario=1100.00;
-								break;
-							case 3:
-								printf("Salário do penúltimo mês?\n%c",272);
-								scanf("%f",&salario02);
-								printf("Salário do antepenúltimo mês?\n%c",272);
-								scanf("%f",&salario03);
-								salario03=(salario01+salario02+salario03)/3;
-								if (salario03<1686.80)
-									salario03=(salario03*0.80);							
-								else if(salario03<2811.61)
-									salario03=((salario03-1686.79)*0.5+1349.43);
-								else{
-									salario03=1911.84;
-								}
-								salario=salario03;
-								if (salario<1100.00)
-									salario=1100.00;
-								break;
-						}
-						//Escolher a quantidade de parcelas
-						switch(tipoBeneficio){
-							case 6 ... 11: //três parcelas
-								soma=3;
-								break;
-							case 12 ... 23://quatro parcelas
-								soma=4;
-								break;
-							case 0 ... 5:  //quantidade invalida
-								printf("\nQuantidade de meses inferior a 6 \n");
-								break;
-							default:     //cinco parcelas
-								soma=5;
-								break;
-						}
-						printf("\nPara os dados Informados o beneficio será de %d parcelas de R$ %.2f no total de R$ %.2f.\n",soma,salario,soma*salario);
-					break;
+					}		
 				}
 				else{
 					system("clear||cls");
@@ -272,7 +195,7 @@ int main(){
 					printf("O usuário NÃO atende aos requisitos para receber o Seguro-Desemprego");
 					printf("\n----------------------------------------------------------------------");
 					break;
-				}
+				}			
 				break;
 			case 3:
 				//https://www.gov.br/trabalho/pt-br/assuntos/trabalhador/seguro-desemprego/seguro-desemprego-empregado-domestico
@@ -399,22 +322,29 @@ int main(){
 				printf("---------------------------------------------------------------------------------------------------------");
 				break;
 			default:
+				system("clear||cls");
 				printf("\n          ########  Opção invalida  #######\n_______________________________________________________");					
 				break;
 		}
 		printf("\n\n\n          Deseja realizar uma nova consulta?\n");
 		printf("\n  %c Digite o número 1 para sim ou o número 2 para não:\n  %c ",272,272);
 		scanf("%d",&tipoBeneficio);
-		if(tipoBeneficio==1){
-			system("clear||cls");
-			teste=true;
-			soma=0;
-		}	
-		else{
-			system("clear||cls");
-			printf("\n\n\n\n\n\n\n        Agradecemos a preferência! \n\n\n\n\n\n\n");
-			return (0);
-			getch();
+		switch(tipoBeneficio){
+			case 1:
+				system("clear||cls");
+				teste=true;
+				soma=0;
+				break;
+			case 2:
+				system("clear||cls");
+				printf("\n\n\n\n\n\n\n        Agradecemos a preferência! \n\n\n\n\n\n\n");
+				return (0);
+				getch();
+				break;
+			default :
+				teste=true;
+				printf("\n          ########  Opção invalida  #######\n_______________________________________________________");
+			break;
 		}
 	}while(teste==true);
 }
